@@ -1,0 +1,780 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Project: Remake script By: perfect cell",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "hello user!",
+   LoadingSubtitle = "by Perfect Cell",
+   Theme = "Amethyst", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Cell Hub"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+Rayfield:Notify({
+   Title = "Notification",
+   Content = "Destroy everything and everyone",
+   Duration = 2.5,
+   Image = 4483362458,
+})
+
+local Tab = Window:CreateTab("Kaiju picker", 18160452628) -- Title, Image
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Gorosaurus",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Gorosaurus"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Godzilla 2019",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Godzilla_2019"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Godzilla 2014",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Godzilla_2014"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Godzilla 2000",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Godzilla_2000"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Orga",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Orga"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Labyrinth",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Labyrinth"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Showa gigan",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "ShowaGigan"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Krystalak",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Krystalak"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Methuselah",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Methuselah"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Titanosaurus",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Titanosaurus"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Tab = Window:CreateTab("special Kaiju", 138394446616707) -- Title, Image
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Armageddon",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Armageddon"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "silence",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Silence"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Void (Admin kaiju, maybe bannable)",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Void"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Tab = Window:CreateTab("Op stuff", 16559945706) -- Title, Image
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Give awakening",
+   Callback = function()
+   local args = {
+    [1] = "RageValue",
+    [2] = 750
+}
+
+game:GetService("Players").LocalPlayer.Character.Animate.Rage_Handle:FireServer(unpack(args))
+
+
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "G2019 Buffed Nuke (USE AT RISK, TOO OP)",
+   Callback = function()
+   local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Animation ID
+local animationId = "rbxassetid://132010227982878"
+
+-- Function to play animation
+local function playAnimation()
+	local humanoid = character:FindFirstChildOfClass("Humanoid")
+	if humanoid then
+		local animation = Instance.new("Animation")
+		animation.AnimationId = animationId
+		local track = humanoid:LoadAnimation(animation)
+		track:Play()
+	end
+end
+
+-- Trigger ultimate sequence
+local function triggerUltimate()
+	playAnimation()
+
+	local animate = character:WaitForChild("Animate")
+
+	-- Play effects and sounds
+	animate.Effects:FireServer("Ultimate", true)
+	animate.Sounds:FireServer("Player", "Ultimate")
+	animate.Effects:FireServer("SmokeTrigger")
+	animate.Effects:FireServer("Pulse", "Start")
+
+	task.wait(4)
+	animate.UltimateHandler:FireServer("RageBegin")
+	animate.Effects:FireServer("Pulse", "Second")
+
+	-- Damage all nearby players within 45 studs
+	for _, otherPlayer in ipairs(game.Players:GetPlayers()) do
+		if otherPlayer ~= player and otherPlayer.Character and otherPlayer.Character:FindFirstChild("HumanoidRootPart") then
+			local rootPart = otherPlayer.Character.HumanoidRootPart
+			local distance = (rootPart.Position - character.HumanoidRootPart.Position).Magnitude
+			if distance <= 245 then
+				game.ReplicatedStorage.Events.All_Kaiju.DamageEvent:FireServer(
+					otherPlayer.Character:FindFirstChild("Humanoid"),
+					false,
+					850,
+					95,
+					rootPart.Position,
+					0.5,
+					0.8,
+					"Stunned"
+				)
+			end
+		end
+	end
+
+	animate.Effects:FireServer("Pulse", "Main")
+	animate.Effects:FireServer("Pulse", "Last")
+
+	task.wait(1)
+	animate.Effects:FireServer("Ultimate", false)
+
+	task.wait(10)
+	animate.UltimateHandler:FireServer("RageEnd")
+end
+
+-- Execute
+triggerUltimate()
+
+   end,
+})
+
+local Tab = Window:CreateTab("Skinned kaiju's", 44833624588) -- Title, Image
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Mecha",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Godzilla_2019-Mecha"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Toy2000",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Godzilla_2000-Toy"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Snow mountain",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Methuselah-Snowy"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Volcano",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Methuselah-Volcanic"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Melt-orga",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Orga-Meltdown"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Uranium",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Orga-Uranium"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "The Son of silence",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Silence-Offspring"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Deep-titanosaurus",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Titanosaurus-DeepSea"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "inferno-titanosaurus",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Titanosaurus-Inferno"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Project: Remake script By: perfect cell",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "hello user!",
+   LoadingSubtitle = "by Perfect Cell",
+   Theme = "Amethyst", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "Cell Hub"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+      FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+Rayfield:Notify({
+   Title = "Notification",
+   Content = "Destroy everything and everyone",
+   Duration = 2.5,
+   Image = 4483362458,
+})
+
+local Tab = Window:CreateTab("Kaiju picker", 18160452628) -- Title, Image
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Gorosaurus",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Gorosaurus"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Godzilla 2019",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Godzilla_2019"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Godzilla 2014",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Godzilla_2014"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Godzilla 2000",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Godzilla_2000"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Orga",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Orga"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Labyrinth",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Labyrinth"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Showa gigan",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "ShowaGigan"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Krystalak",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Krystalak"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Methuselah",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Methuselah"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Titanosaurus",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Titanosaurus"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Tab = Window:CreateTab("special Kaiju", 138394446616707) -- Title, Image
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Armageddon",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Armageddon"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "silence",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Silence"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Void (Admin kaiju, maybe bannable)",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Void"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Tab = Window:CreateTab("Op stuff", 16559945706) -- Title, Image
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Give awakening",
+   Callback = function()
+   local args = {
+    [1] = "RageValue",
+    [2] = 750
+}
+
+game:GetService("Players").LocalPlayer.Character.Animate.Rage_Handle:FireServer(unpack(args))
+
+
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "G2019 Buffed Nuke (USE AT RISK, TOO OP)",
+   Callback = function()
+   local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+-- Animation ID
+local animationId = "rbxassetid://132010227982878"
+
+-- Function to play animation
+local function playAnimation()
+	local humanoid = character:FindFirstChildOfClass("Humanoid")
+	if humanoid then
+		local animation = Instance.new("Animation")
+		animation.AnimationId = animationId
+		local track = humanoid:LoadAnimation(animation)
+		track:Play()
+	end
+end
+
+-- Trigger ultimate sequence
+local function triggerUltimate()
+	playAnimation()
+
+	local animate = character:WaitForChild("Animate")
+
+	-- Play effects and sounds
+	animate.Effects:FireServer("Ultimate", true)
+	animate.Sounds:FireServer("Player", "Ultimate")
+	animate.Effects:FireServer("SmokeTrigger")
+	animate.Effects:FireServer("Pulse", "Start")
+
+	task.wait(4)
+	animate.UltimateHandler:FireServer("RageBegin")
+	animate.Effects:FireServer("Pulse", "Second")
+
+	-- Damage all nearby players within 45 studs
+	for _, otherPlayer in ipairs(game.Players:GetPlayers()) do
+		if otherPlayer ~= player and otherPlayer.Character and otherPlayer.Character:FindFirstChild("HumanoidRootPart") then
+			local rootPart = otherPlayer.Character.HumanoidRootPart
+			local distance = (rootPart.Position - character.HumanoidRootPart.Position).Magnitude
+			if distance <= 245 then
+				game.ReplicatedStorage.Events.All_Kaiju.DamageEvent:FireServer(
+					otherPlayer.Character:FindFirstChild("Humanoid"),
+					false,
+					850,
+					95,
+					rootPart.Position,
+					0.5,
+					0.8,
+					"Stunned"
+				)
+			end
+		end
+	end
+
+	animate.Effects:FireServer("Pulse", "Main")
+	animate.Effects:FireServer("Pulse", "Last")
+
+	task.wait(1)
+	animate.Effects:FireServer("Ultimate", false)
+
+	task.wait(10)
+	animate.UltimateHandler:FireServer("RageEnd")
+end
+
+-- Execute
+triggerUltimate()
+
+   end,
+})
+
+local Tab = Window:CreateTab("Skinned kaiju's", 44833624588) -- Title, Image
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Mecha",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Godzilla_2019-Mecha"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Toy2000",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Godzilla_2000-Toy"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Snow mountain",
+   Callback
