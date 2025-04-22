@@ -777,4 +777,99 @@ game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_C
 
 local Button = Tab:CreateButton({
    Name = "Snow mountain",
-   Callback
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Methuselah-Snowy"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Volcano",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Methuselah-Volcanic"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Melt-orga",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Orga-Meltdown"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Uranium",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Orga-Uranium"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "The Son of silence",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Silence-Offspring"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Deep-titanosaurus",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Titanosaurus-DeepSea"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "inferno-titanosaurus",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Titanosaurus-Inferno"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+
+   end,
+})
+
