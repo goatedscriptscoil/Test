@@ -58,6 +58,19 @@ game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_C
 })
 
 local Button = Tab:CreateButton({
+   Name = "titanus Mecha Godzilla",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Mechagodzilla_2021"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
    Name = "Godzilla 2019",
    Callback = function()
    local args = {
