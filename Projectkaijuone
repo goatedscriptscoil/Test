@@ -3,7 +3,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
    Name = "Project: Remake script By: perfect cell",
    Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
-   LoadingTitle = "hello user!",
+   LoadingTitle = "Enjoy it lil bro!",
    LoadingSubtitle = "by Perfect Cell",
    Theme = "Amethyst", -- Check https://docs.sirius.menu/rayfield/configuration/themes
 
@@ -71,19 +71,6 @@ game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_C
 })
 
 local Button = Tab:CreateButton({
-   Name = "Mechagodzilla",
-   Callback = function()
-   local args = {
-    [1] = "SelectedKaiju",
-    [2] = "Mechagodzilla_2021"
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
-
-   end,
-})
-
-local Button = Tab:CreateButton({
    Name = "Godzilla 2014",
    Callback = function()
    local args = {
@@ -115,6 +102,19 @@ local Button = Tab:CreateButton({
    local args = {
     [1] = "SelectedKaiju",
     [2] = "Orga"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Godzilla 2019",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Mechagodzilla_2021"
 }
 
 game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
@@ -885,4 +885,3 @@ game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_C
 
    end,
 })
-
