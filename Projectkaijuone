@@ -71,7 +71,7 @@ game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_C
 })
 
 local Button = Tab:CreateButton({
-   Name = "Mechagodzilla 2021",
+   Name = "Mechagodzilla",
    Callback = function()
    local args = {
     [1] = "SelectedKaiju",
