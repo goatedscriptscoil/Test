@@ -249,6 +249,55 @@ game:GetService("Players").LocalPlayer.Character.Animate.Rage_Handle:FireServer(
 local Divider = Tab:CreateDivider()
 
 local Button = Tab:CreateButton({
+   Name = "MechaGodzilla missile spam, with auto detect player",
+   Callback = function()
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local Animate = Character:WaitForChild("Animate")
+
+-- Find nearest player
+local function getNearestPlayer()
+	local closestPlayer = nil
+	local shortestDistance = math.huge
+	for _, player in ipairs(Players:GetPlayers()) do
+		if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+			local distance = (Character:WaitForChild("HumanoidRootPart").Position - player.Character.HumanoidRootPart.Position).Magnitude
+			if distance < shortestDistance then
+				shortestDistance = distance
+				closestPlayer = player
+			end
+		end
+	end
+	return closestPlayer
+end
+
+local target = getNearestPlayer()
+if target then
+	local args = {
+		[1] = "EnemyValue",
+		[2] = target.Name
+	}
+	Animate.Missiles:FireServer(unpack(args))
+	wait(0.5)
+	
+	local fireArgs = {
+		[1] = "Missiles"
+	}
+	
+	for i = 1, 18 do
+		Animate.Missiles:FireServer(unpack(fireArgs))
+		wait(0.09)
+	end
+end
+
+
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
    Name = "G2019 Buffed Nuke (USE AT RISK, TOO OP)",
    Callback = function()
    local player = game.Players.LocalPlayer
