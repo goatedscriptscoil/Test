@@ -389,7 +389,7 @@ end
 wait(2)
 
 -- Fire Roar events 5 times
-for _ = 1, 3 do
+for _ = 1, 4 do
 	game:GetService("Players").LocalPlayer.Character.Animate.Sounds:FireServer("Player", "Roar")
 	game:GetService("Players").LocalPlayer.Character.Animate.Effects:FireServer("Roar")
 end
@@ -401,7 +401,7 @@ wait(0.8)
 -- Fire Beam effect 10 times
 for _ = 1, 10 do
 	game:GetService("Players").LocalPlayer.Character.Animate.Effects:FireServer("Beam")
-	wait(0.2)
+	wait(0.05)
 end
 
 -- Damage nearest players every 0.2 seconds for 4 seconds
