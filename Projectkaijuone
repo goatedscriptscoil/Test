@@ -365,6 +365,87 @@ game:GetService("Players").LocalPlayer.Character.Animate.Rage_Handle:FireServer(
 local Divider = Tab:CreateDivider()
 
 local Button = Tab:CreateButton({
+   Name = "Void custom ult",
+   Callback = function()
+   -- Animation setup
+local animationId = "rbxassetid://82577779238482"
+
+local function playAnimation(character)
+	local humanoid = character:FindFirstChildOfClass("Humanoid")
+	if humanoid then
+		local anim = Instance.new("Animation")
+		anim.AnimationId = animationId
+		local track = humanoid:LoadAnimation(anim)
+		track:Play()
+	end
+end
+
+-- Connect to character spawn
+game.Players.LocalPlayer.CharacterAdded:Connect(playAnimation)
+if game.Players.LocalPlayer.Character then
+	playAnimation(game.Players.LocalPlayer.Character)
+end
+
+wait(2)
+
+-- Fire Roar events 5 times
+for _ = 1, 5 do
+	game:GetService("Players").LocalPlayer.Character.Animate.Sounds:FireServer("Player", "Roar")
+	game:GetService("Players").LocalPlayer.Character.Animate.Effects:FireServer("Roar")
+end
+
+-- Fire BeamCharge effect once
+game:GetService("Players").LocalPlayer.Character.Animate.Effects:FireServer("BeamCharge")
+wait(0.8)
+
+-- Fire Beam effect 10 times
+for _ = 1, 10 do
+	game:GetService("Players").LocalPlayer.Character.Animate.Effects:FireServer("Beam")
+	wait(0.05)
+end
+
+-- Damage nearest players every 0.2 seconds for 4 seconds
+local char = game.Players.LocalPlayer.Character
+local root = char and char:FindFirstChild("HumanoidRootPart")
+local rs = game:GetService("ReplicatedStorage")
+local damageEvent = rs:WaitForChild("Events"):WaitForChild("All_Kaiju"):WaitForChild("DamageEvent")
+
+if root then
+	local duration = 4
+	local interval = 0.2
+	local radius = 165
+	local startTime = tick()
+
+	while tick() - startTime < duration do
+		for _, player in pairs(game.Players:GetPlayers()) do
+			if player ~= game.Players.LocalPlayer and player.Character then
+				local hrp = player.Character:FindFirstChild("HumanoidRootPart")
+				local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+				if hrp and humanoid and (hrp.Position - root.Position).Magnitude <= radius then
+					local args = {
+						[1] = humanoid,
+						[2] = false,
+						[3] = 35,
+						[4] = 25,
+						[5] = hrp.Position,
+						[6] = 0.3,
+						[7] = 0.8,
+						[8] = "Stunned"
+					}
+					damageEvent:FireServer(unpack(args))
+				end
+			end
+		end
+		wait(interval)
+	end
+end
+
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
    Name = "MechaGodzilla missile spam, with auto detect player",
    Callback = function()
 local Players = game:GetService("Players")
@@ -484,89 +565,6 @@ triggerUltimate()
 
    end,
 })
-
-local Divider = Tab:CreateDivider()
-
-local Button = Tab:CreateButton({
-   Name = "Void custom ult",
-   Callback = function()
--- Animation setup
-local animationId = "rbxassetid://82577779238482"
-
-local function playAnimation(character)
-	local humanoid = character:FindFirstChildOfClass("Humanoid")
-	if humanoid then
-		local anim = Instance.new("Animation")
-		anim.AnimationId = animationId
-		local track = humanoid:LoadAnimation(anim)
-		track:Play()
-	end
-end
-
--- Connect to character spawn
-game.Players.LocalPlayer.CharacterAdded:Connect(playAnimation)
-if game.Players.LocalPlayer.Character then
-	playAnimation(game.Players.LocalPlayer.Character)
-end
-
-wait(2)
-
--- Fire Roar events 5 times
-for _ = 1, 5 do
-	game:GetService("Players").LocalPlayer.Character.Animate.Sounds:FireServer("Player", "Roar")
-	game:GetService("Players").LocalPlayer.Character.Animate.Effects:FireServer("Roar")
-end
-
--- Fire BeamCharge effect once
-game:GetService("Players").LocalPlayer.Character.Animate.Effects:FireServer("BeamCharge")
-wait(0.8)
-
--- Fire Beam effect 10 times
-for _ = 1, 10 do
-	game:GetService("Players").LocalPlayer.Character.Animate.Effects:FireServer("Beam")
-	wait(0.05)
-end
-
--- Damage nearest players every 0.2 seconds for 4 seconds
-local char = game.Players.LocalPlayer.Character
-local root = char and char:FindFirstChild("HumanoidRootPart")
-local rs = game:GetService("ReplicatedStorage")
-local damageEvent = rs:WaitForChild("Events"):WaitForChild("All_Kaiju"):WaitForChild("DamageEvent")
-
-if root then
-	local duration = 4
-	local interval = 0.2
-	local radius = 165
-	local startTime = tick()
-
-	while tick() - startTime < duration do
-		for _, player in pairs(game.Players:GetPlayers()) do
-			if player ~= game.Players.LocalPlayer and player.Character then
-				local hrp = player.Character:FindFirstChild("HumanoidRootPart")
-				local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
-				if hrp and humanoid and (hrp.Position - root.Position).Magnitude <= radius then
-					local args = {
-						[1] = humanoid,
-						[2] = false,
-						[3] = 35,
-						[4] = 25,
-						[5] = hrp.Position,
-						[6] = 0.3,
-						[7] = 0.8,
-						[8] = "Stunned"
-					}
-					damageEvent:FireServer(unpack(args))
-				end
-			end
-		end
-		wait(interval)
-	end
-end
-
-
-   end,
-})
-
 
 local Tab = Window:CreateTab("Skinned kaiju's", 44833624588) -- Title, Image
 local Divider = Tab:CreateDivider()
@@ -865,4 +863,93 @@ game:GetService("ReplicatedStorage").Events.data_Change:FireServer(unpack(args))
 })
 
 local Button = Tab:CreateButton({
-   Nam
+   Name = "Speed",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Krystalak"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+local args = {
+    [1] = "SelectedSkin",
+    [2] = "Krystalak-Speed"
+}
+
+game:GetService("ReplicatedStorage").Events.data_Change:FireServer(unpack(args))
+
+
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Hanna",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Godzilla_2014"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+local args = {
+    [1] = "SelectedSkin",
+    [2] = "Godzilla_2014-Hanna"
+}
+
+game:GetService("ReplicatedStorage").Events.data_Change:FireServer(unpack(args))
+
+
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Toe nail Armageddon",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Armageddon"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+local args = {
+    [1] = "SelectedSkin",
+    [2] = "Armageddon-Monotone"
+}
+
+game:GetService("ReplicatedStorage").Events.data_Change:FireServer(unpack(args))
+
+
+
+
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Black ops",
+   Callback = function()
+   local args = {
+    [1] = "SelectedKaiju",
+    [2] = "Mechagodzilla_2021"
+}
+
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("data_Change"):FireServer(unpack(args))
+
+local args = {
+    [1] = "SelectedSkin",
+    [2] = "Mechagodzilla_2021-BlackOps"
+}
+
+game:GetService("ReplicatedStorage").Events.data_Change:FireServer(unpack(args))
+
+
+
+
+   end,
+})
