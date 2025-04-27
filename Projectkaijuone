@@ -495,6 +495,88 @@ end
 local Divider = Tab:CreateDivider()
 
 local Button = Tab:CreateButton({
+   Name = "Guaranteed Mecha Godzilla tail sting ",
+   Callback = function()
+-- Define the animation ID
+local animationId = "rbxassetid://97197544566741"
+
+-- Function to play animation
+local function playAnimationOnSpawn(character)
+    -- Check if the character and humanoid exist
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if humanoid then
+        -- Load animation
+        local animation = Instance.new("Animation")
+        animation.AnimationId = animationId
+        
+        -- Play animation
+        local animationTrack = humanoid:LoadAnimation(animation)
+        animationTrack:Play()
+    end
+end
+
+-- Listen for the player's character to spawn
+game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
+    playAnimationOnSpawn(character)
+end)
+
+-- Play animation immediately if the character is already spawned
+if game.Players.LocalPlayer.Character then
+    playAnimationOnSpawn(game.Players.LocalPlayer.Character)
+end
+
+-- Function to find the nearest player within a 135-stud radius
+local function findNearestPlayer()
+    local closestPlayer = nil
+    local closestDistance = 125  -- 135 stud radius
+    local currentPlayer = game.Players.LocalPlayer
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if player.Character and player ~= currentPlayer then
+            local distance = (player.Character.HumanoidRootPart.Position - currentPlayer.Character.HumanoidRootPart.Position).Magnitude
+            if distance <= closestDistance then
+                closestPlayer = player
+                closestDistance = distance
+            end
+        end
+    end
+    return closestPlayer
+end
+
+-- Wait for a short period before executing the damage event
+wait(0.8)
+
+-- Find the nearest player
+local targetPlayer = findNearestPlayer()
+
+-- If a target is found, send the damage event repeatedly for 2.5 seconds
+if targetPlayer then
+    local args = {
+        [1] = targetPlayer.Character.Humanoid,  -- Target the humanoid of the nearest player
+        [2] = false,  -- Assuming this value is unchanged
+        [3] = 5,      -- Damage value (unchanged from your script)
+        [4] = 2,      -- Another parameter (unchanged from your script)
+        [5] = Vector3.new(0, 0, 0),  -- The position (unchanged from your script)
+        [6] = 0,      -- Another parameter (unchanged from your script)
+        [7] = 4.5,    -- Another parameter (unchanged from your script)
+        [8] = "Stunned",  -- Status effect
+        [9] = "G19"    -- Identifier for the move
+    }
+
+    -- Repeat the damage event every 0.08 seconds for 2.5 seconds
+    local elapsedTime = 0
+    while elapsedTime < 2 do
+        game:GetService("ReplicatedStorage").Events.All_Kaiju.DamageEventMove:FireServer(unpack(args))
+        wait(0.08)
+        elapsedTime = elapsedTime + 0.08
+    end
+end
+
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
    Name = "G2019 Buffed Nuke (USE AT RISK, TOO OP)",
    Callback = function()
    local player = game.Players.LocalPlayer
