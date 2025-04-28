@@ -365,6 +365,474 @@ game:GetService("Players").LocalPlayer.Character.Animate.Rage_Handle:FireServer(
 local Divider = Tab:CreateDivider()
 
 local Button = Tab:CreateButton({
+   Name = "G14 Bash move",
+   Callback = function()
+   -- SERVICES
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+-- CONSTANTS
+local LocalPlayer = Players.LocalPlayer
+local DamageEvent = ReplicatedStorage:WaitForChild("Events"):WaitForChild("All_Kaiju"):WaitForChild("DamageEvent")
+local Camera = workspace.CurrentCamera
+local SPEED = 75
+local DAMAGE_RADIUS = 85
+local DAMAGE_REPEAT_TIME = 0.3
+local DAMAGE_TOTAL_DURATION = 2.5
+local AnimationId = "rbxassetid://101695021065716"
+
+-- VARIABLES
+local moving = false
+local currentTween
+local animationTrack
+
+-- FUNCTION TO PLAY ANIMATION
+local function playAnimationOnSpawn(character)
+    local humanoid = character:WaitForChild("Humanoid", 5)
+    if humanoid then
+        local animation = Instance.new("Animation")
+        animation.AnimationId = AnimationId
+        animationTrack = humanoid:LoadAnimation(animation)
+        animationTrack:Play()
+
+        -- When animation ends, stop movement
+        animationTrack.Stopped:Connect(function()
+            moving = false
+            if currentTween then
+                currentTween:Cancel()
+            end
+        end)
+    end
+end
+
+-- FUNCTION TO MOVE PLAYER
+local function moveCharacter()
+    if not moving then return end
+
+    local character = LocalPlayer.Character
+    if not character or not character:FindFirstChild("HumanoidRootPart") then return end
+
+    local root = character.HumanoidRootPart
+    local direction = Camera.CFrame.LookVector
+    direction = Vector3.new(direction.X, 0, direction.Z).Unit -- Flatten so you don't fly
+
+    -- Destination based on speed and time
+    local distance = SPEED * 0.1 -- Move 0.1 second ahead each tween
+    local goalPosition = root.Position + (direction * distance)
+
+    if currentTween then
+        currentTween:Cancel()
+    end
+
+    local tweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Linear)
+    local tween = TweenService:Create(root, tweenInfo, {CFrame = CFrame.new(goalPosition, goalPosition + direction)})
+    tween:Play()
+    currentTween = tween
+end
+
+-- FUNCTION TO FIND NEAREST PLAYER
+local function getNearestPlayer()
+    local character = LocalPlayer.Character
+    if not character or not character:FindFirstChild("HumanoidRootPart") then return nil end
+    local root = character.HumanoidRootPart
+    local nearestPlayer
+    local nearestDistance = DAMAGE_RADIUS
+
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local dist = (player.Character.HumanoidRootPart.Position - root.Position).Magnitude
+            if dist <= nearestDistance then
+                nearestPlayer = player
+                nearestDistance = dist
+            end
+        end
+    end
+
+    return nearestPlayer
+end
+
+-- FUNCTION TO DAMAGE NEAREST PLAYER
+local function startDamaging()
+    local startTime = tick()
+
+    while tick() - startTime < DAMAGE_TOTAL_DURATION do
+        local targetPlayer = getNearestPlayer()
+        if targetPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("Humanoid") then
+            -- Fire damage event
+            local args = {
+                [1] = targetPlayer.Character.Humanoid,
+                [2] = false,
+                [3] = 12,
+                [4] = 10,
+                [5] = targetPlayer.Character.HumanoidRootPart.Position,
+                [6] = 0.35,
+                [7] = 0.8,
+                [8] = "Stunned"
+            }
+            DamageEvent:FireServer(unpack(args))
+        end
+
+        task.wait(DAMAGE_REPEAT_TIME)
+    end
+end
+
+-- MAIN
+LocalPlayer.CharacterAdded:Connect(function(character)
+    playAnimationOnSpawn(character)
+
+    character:WaitForChild("HumanoidRootPart")
+
+    moving = true
+
+    -- Start moving in LookVector repeatedly
+    RunService.Heartbeat:Connect(function()
+        if moving then
+            moveCharacter()
+        end
+    end)
+
+    -- Start damaging while moving
+    task.spawn(startDamaging)
+end)
+
+-- Play immediately if character already loaded
+if LocalPlayer.Character then
+    playAnimationOnSpawn(LocalPlayer.Character)
+
+    if LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        moving = true
+
+        RunService.Heartbeat:Connect(function()
+            if moving then
+                moveCharacter()
+            end
+        end)
+
+        task.spawn(startDamaging)
+    end
+end
+
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "G14 Kiss of death",
+   Callback = function()
+   local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+
+local function getNearestPlayer()
+    local nearest, distance = nil, 95
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local magnitude = (HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+            if magnitude < distance then
+                distance = magnitude
+                nearest = player
+            end
+        end
+    end
+    return nearest
+end
+
+-- Play grab sound
+local args = {
+    [1] = "Player",
+    [2] = "Grab"
+}
+Character.Animate.Sounds:FireServer(unpack(args))
+
+-- Play effect
+local args = {
+    [1] = "Dorsals",
+    [2] = "Special3"
+}
+Character.Animate.Effects:FireServer(unpack(args))
+
+-- Play animation (first one)
+local animationId1 = "rbxassetid://86084374561404"
+local humanoid = Character:FindFirstChildOfClass("Humanoid")
+if humanoid then
+    local animation = Instance.new("Animation")
+    animation.AnimationId = animationId1
+    local track = humanoid:LoadAnimation(animation)
+    track:Play()
+end
+
+task.wait(0.5)
+
+-- Play sound Special3
+local args = {
+    [1] = "Player",
+    [2] = "Special3"
+}
+Character.Animate.Sounds:FireServer(unpack(args))
+
+-- Play second animation
+local animationId2 = "rbxassetid://124262637069322"
+if humanoid then
+    local animation = Instance.new("Animation")
+    animation.AnimationId = animationId2
+    local track = humanoid:LoadAnimation(animation)
+    track:Play()
+end
+
+task.wait(1.7)
+
+-- Find initial target
+local targetPlayer = getNearestPlayer()
+if not targetPlayer then
+    warn("No target found within 95 studs!")
+    return
+end
+
+-- GRAB EVENT
+local args = {
+    [1] = "Grab",
+    [2] = targetPlayer.Character,
+    [3] = 1.85,
+    [4] = true
+}
+Character.Animate.Grab:FireServer(unpack(args))
+
+-- IMMEDIATELY after grabbing, play Blue Beam effect
+local args = {
+    [1] = "Beam",
+    [2] = "Blue"
+}
+Character.Animate.Effects:FireServer(unpack(args))
+
+-- First hit damage
+local args = {
+    [1] = targetPlayer.Character:FindFirstChildOfClass("Humanoid"),
+    [2] = true,
+    [3] = 25,
+    [4] = 0,
+    [5] = Vector3.new(0, 0, 0),
+    [6] = 0,
+    [7] = 2.2,
+    [8] = "Grab"
+}
+ReplicatedStorage.Events.All_Kaiju.DamageEvent:FireServer(unpack(args))
+
+-- Damage over time (updates target every 0.2s)
+local startTime = tick()
+while tick() - startTime < 2 do
+    local newTarget = getNearestPlayer()
+    if newTarget then
+        local args = {
+            [1] = newTarget.Character:FindFirstChildOfClass("Humanoid"),
+            [2] = false,
+            [3] = 12,
+            [4] = 10,
+            [5] = Vector3.new(-27.61420440673828, 0.000001160312876891112, 21.504783630371094),
+            [6] = 0.35,
+            [7] = 5,
+            [8] = "Stunned"
+        }
+        ReplicatedStorage.Events.All_Kaiju.DamageEvent:FireServer(unpack(args))
+    end
+    task.wait(0.2)
+end
+
+-- After damage, play GrabHit sound
+local args = {
+    [1] = "Player",
+    [2] = "GrabHit"
+}
+Character.Animate.Sounds:FireServer(unpack(args))
+
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
+   Name = "Locked in mg21 (click 2x)",
+   Callback = function()
+   -- StarterCharacterScripts LocalScript
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+
+-- Settings
+local OutlineColorStart = Color3.fromRGB(255, 0, 0) -- Start Red
+local OutlineColorEnd = Color3.fromRGB(0, 0, 255) -- End Blue
+local UpdateRate = 0.1 -- Update info every 0.1s
+
+-- Create BillboardGui
+local function createBillboard(player)
+	local character = player.Character
+	if not character then return end
+	
+	local hrp = character:FindFirstChild("HumanoidRootPart")
+	local humanoid = character:FindFirstChildOfClass("Humanoid")
+	if not hrp or not humanoid then return end
+
+	-- Prevent duplicates
+	if hrp:FindFirstChild("InfoBillboard") then
+		hrp.InfoBillboard:Destroy()
+	end
+
+	local billboard = Instance.new("BillboardGui")
+	billboard.Name = "InfoBillboard"
+	billboard.Adornee = hrp
+	billboard.Size = UDim2.new(6,0,3,0)
+	billboard.StudsOffset = Vector3.new(7, 1, 0) -- 7 studs to right
+	billboard.AlwaysOnTop = true
+	billboard.Parent = hrp
+
+	local background = Instance.new("Frame")
+	background.Size = UDim2.new(1,0,1,0)
+	background.BackgroundTransparency = 0.3
+	background.BackgroundColor3 = OutlineColorStart
+	background.BorderSizePixel = 0
+	background.Parent = billboard
+
+	local layout = Instance.new("UIListLayout")
+	layout.FillDirection = Enum.FillDirection.Vertical
+	layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	layout.VerticalAlignment = Enum.VerticalAlignment.Center
+	layout.Padding = UDim.new(0,2)
+	layout.Parent = background
+
+	local healthLabel = Instance.new("TextLabel")
+	healthLabel.Name = "HealthLabel"
+	healthLabel.Size = UDim2.new(1,0,0.3,0)
+	healthLabel.BackgroundTransparency = 1
+	healthLabel.TextColor3 = Color3.new(1,1,1)
+	healthLabel.Font = Enum.Font.GothamBold
+	healthLabel.TextScaled = true
+	healthLabel.Text = ""
+	healthLabel.Parent = background
+
+	local infoLabel = Instance.new("TextLabel")
+	infoLabel.Name = "InfoLabel"
+	infoLabel.Size = UDim2.new(1,0,0.3,0)
+	infoLabel.BackgroundTransparency = 1
+	infoLabel.TextColor3 = Color3.new(1,1,1)
+	infoLabel.Font = Enum.Font.GothamBold
+	infoLabel.TextScaled = true
+	infoLabel.Text = ""
+	infoLabel.Parent = background
+
+	local distanceLabel = Instance.new("TextLabel")
+	distanceLabel.Name = "DistanceLabel"
+	distanceLabel.Size = UDim2.new(1,0,0.3,0)
+	distanceLabel.BackgroundTransparency = 1
+	distanceLabel.TextColor3 = Color3.new(1,1,1)
+	distanceLabel.Font = Enum.Font.GothamBold
+	distanceLabel.TextScaled = true
+	distanceLabel.Text = ""
+	distanceLabel.Parent = background
+
+	-- Tween the background color back and forth (Blue <-> Red)
+	local tweenInfo = TweenInfo.new(2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true) -- 2 seconds, repeat forever, reverse
+	local tween = TweenService:Create(background, tweenInfo, {BackgroundColor3 = OutlineColorEnd})
+	tween:Play()
+
+	return billboard, humanoid
+end
+
+-- Create Outline using Highlight
+local function outlineCharacter(character)
+	if character:FindFirstChild("CharacterHighlight") then
+		character.CharacterHighlight:Destroy()
+	end
+	
+	local highlight = Instance.new("Highlight")
+	highlight.Name = "CharacterHighlight"
+	highlight.FillTransparency = 1 -- Only outline visible
+	highlight.OutlineTransparency = 0 -- Full outline
+	highlight.OutlineColor = Color3.fromRGB(255, 0, 0) -- Bright Red
+	highlight.Adornee = character
+	highlight.Parent = character
+end
+
+-- Update the Billboard Info
+local function updateInfo(player, billboard, humanoid)
+	if not player.Character then return end
+	if not billboard then return end
+	if not humanoid then return end
+	
+	local healthLabel = billboard:FindFirstChild("Frame") and billboard.Frame:FindFirstChild("HealthLabel")
+	local infoLabel = billboard:FindFirstChild("Frame") and billboard.Frame:FindFirstChild("InfoLabel")
+	local distanceLabel = billboard:FindFirstChild("Frame") and billboard.Frame:FindFirstChild("DistanceLabel")
+
+	if healthLabel then
+		healthLabel.Text = "Health - "..math.floor(humanoid.Health)
+	end
+	if infoLabel then
+		infoLabel.Text = "Information - "..player.Name
+	end
+	if distanceLabel and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+		local hrp = player.Character.HumanoidRootPart
+		local myhrp = Character:FindFirstChild("HumanoidRootPart")
+		if myhrp then
+			local distance = (myhrp.Position - hrp.Position).Magnitude
+			distanceLabel.Text = "Distance - "..math.floor(distance).." studs"
+		end
+	end
+end
+
+-- Setup a player
+local function setupPlayer(player)
+	if player == LocalPlayer then return end -- Skip yourself
+
+	player.CharacterAdded:Connect(function(character)
+		character:WaitForChild("HumanoidRootPart")
+		character:WaitForChild("Humanoid")
+		
+		local billboard, humanoid = createBillboard(player)
+		outlineCharacter(character)
+		
+		RunService.Heartbeat:Connect(function()
+			if billboard and humanoid and humanoid.Health > 0 then
+				updateInfo(player, billboard, humanoid)
+			end
+		end)
+	end)
+
+	-- In case character already exists
+	if player.Character then
+		local billboard, humanoid = createBillboard(player)
+		outlineCharacter(player.Character)
+		
+		RunService.Heartbeat:Connect(function()
+			if billboard and humanoid and humanoid.Health > 0 then
+				updateInfo(player, billboard, humanoid)
+			end
+		end)
+	end
+end
+
+-- Initial Players
+for _, player in ipairs(Players:GetPlayers()) do
+	setupPlayer(player)
+end
+
+-- New Players
+Players.PlayerAdded:Connect(function(player)
+	setupPlayer(player)
+end)
+
+   end,
+})
+
+local Divider = Tab:CreateDivider()
+
+local Button = Tab:CreateButton({
    Name = "Void custom ult",
    Callback = function()
    -- Animation setup
